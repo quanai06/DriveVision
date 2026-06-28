@@ -1,0 +1,48 @@
+# DriveVision runtime configuration.
+# Each stage can be toggled independently — turn things on as you implement them.
+
+source:
+  type: video            # video | webcam | carla
+  path: data/samples/sample.mp4
+  webcam_index: 0
+  loop: false            # loop video when it ends (handy for demos)
+  max_frames: null       # stop after N frames (null = all)
+
+perception:
+  detection:
+    enabled: true
+    weights: models/weights/yolo.pt   # if missing, falls back to pretrained 'yolov8n.pt'
+    conf: 0.35
+    iou: 0.5
+    classes: null                      # null = all COCO classes; or list of ids to keep
+    imgsz: 640
+  tracking:
+    enabled: true
+    max_age: 30          # frames a track survives without a match
+    iou_threshold: 0.3
+  lane:
+    enabled: false
+    method: classical    # classical | model
+  traffic_light:
+    enabled: false
+
+fusion:
+  enabled: false         # only meaningful when depth/semantic available (CARLA)
+
+risk:
+  enabled: true
+  ttc_warn: 3.0          # seconds
+  ttc_danger: 1.5
+  ego_lane_ratio: 0.4    # central horizontal band treated as ego lane (0..1)
+
+decision:
+  enabled: true
+
+output:
+  display: false         # cv2.imshow window (local only)
+  save_path: null        # e.g. output/annotated.mp4
+  fps: 30
+
+api:
+  host: 0.0.0.0
+  port: 8000

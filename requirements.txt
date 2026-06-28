@@ -1,0 +1,14 @@
+# Core runtime (M0)
+numpy>=1.24
+opencv-python>=4.8
+pyyaml>=6.0
+
+# Perception models (M1+) — YOLO detection/segmentation
+ultralytics>=8.2
+
+# API + dashboard (M4)
+fastapi>=0.110
+uvicorn[standard]>=0.27
+
+# Dev
+pytest>=8.0

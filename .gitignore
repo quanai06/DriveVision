@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtualenv
+.venv/
+venv/
+env/
+
+# Project data & weights (heavy / not versioned)
+data/
+!data/samples/.gitkeep
+models/weights/
+!models/weights/.gitkeep
+output/
+*.pt
+*.onnx
+*.engine
+
+# Notebooks scratch
+.ipynb_checkpoints/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
