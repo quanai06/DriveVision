@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- DriveVision dashboard — SKELETON (M4).
+     Replace the placeholder with <img src="/video"> for the MJPEG stream and a
+     side panel that polls /api/scene for risk / decision / object counts. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>DriveVision</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 0; background: #0b0f14; color: #e6edf3; }
+      header { padding: 12px 20px; background: #111824; font-weight: 600; }
+      .layout { display: flex; gap: 16px; padding: 16px; }
+      .video { flex: 3; background: #000; min-height: 360px; display: grid; place-items: center; }
+      .panel { flex: 1; background: #111824; border-radius: 8px; padding: 16px; }
+    </style>
+  </head>
+  <body>
+    <header>DriveVision — Perception Dashboard</header>
+    <div class="layout">
+      <div class="video"><!-- TODO: <img src="/video" /> --><span>video stream</span></div>
+      <div class="panel">
+        <h3>Risk / Decision</h3>
+        <!-- TODO: poll /api/scene and render here -->
+        <p>panel placeholder</p>
+      </div>
+    </div>
+  </body>
+</html>

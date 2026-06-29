@@ -16,6 +16,7 @@ perception:
     iou: 0.5
     classes: null                      # null = all COCO classes; or list of ids to keep
     imgsz: 640
+    device: null                       # null = auto (CUDA if available) | "cpu" | "cuda:0"
   tracking:
     enabled: true
     max_age: 30          # frames a track survives without a match
@@ -39,9 +40,14 @@ decision:
   enabled: true
 
 output:
-  display: false         # cv2.imshow window (local only)
+  display: false         # cv2.imshow window (local only; needs non-headless OpenCV)
   save_path: null        # e.g. output/annotated.mp4
-  fps: 30
+  fps: 30                # FPS used when writing the output file (not inference FPS)
+  window_name: DriveVision
+
+logging:
+  level: INFO            # DEBUG | INFO | WARNING | ERROR
+  log_interval: 30       # print a progress line every N frames
 
 api:
   host: 0.0.0.0

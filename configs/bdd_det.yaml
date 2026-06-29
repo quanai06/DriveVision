@@ -1,0 +1,21 @@
+# BDD100K detection — NATIVE 10-class space (ids 0..9).
+# Dùng cho: (1) FINE-TUNE YOLO trên BDD, (2) đo accuracy của model ĐÃ fine-tune.
+# Nhãn YOLO sinh bằng: scripts/convert_bdd_to_yolo.py --target bdd
+#
+# Cấu trúc thư mục mong đợi (chỉnh `path` cho đúng máy/Kaggle):
+#   <path>/images/train/*.jpg   <path>/labels/train/*.txt
+#   <path>/images/val/*.jpg     <path>/labels/val/*.txt
+path: data/bdd100k
+train: images/train
+val: images/val
+names:
+  0: pedestrian
+  1: rider
+  2: car
+  3: truck
+  4: bus
+  5: train
+  6: motorcycle
+  7: bicycle
+  8: traffic light
+  9: traffic sign
