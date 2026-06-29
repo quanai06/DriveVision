@@ -19,13 +19,28 @@ perception:
     device: null                       # null = auto (CUDA if available) | "cpu" | "cuda:0"
   tracking:
     enabled: true
+    backend: simple      # simple (IoU + Hungarian) | bytetrack (ultralytics)
     max_age: 30          # frames a track survives without a match
     iou_threshold: 0.3
+    min_hits: 3          # frames seen before a track is shown (suppresses ghosts)
   lane:
-    enabled: false
-    method: classical    # classical | model
+    enabled: true          # Phase 3: classical lane detection on
+    method: classical      # classical | model
+    use_perspective: false # true = bird's-eye view + sliding window
+    smooth_alpha: 0.30     # EMA factor (perspective mode)
+    smooth_buffer: 7       # frames averaged (Hough mode)
+    poly_deg: 1            # 1 = straight, 2 = curved
+    weights: models/weights/lane.pt   # model mode (Phase 8)
+    model_type: yolov8-seg            # yolov8-seg | yolop | ufld
+    device: cpu
   traffic_light:
-    enabled: false
+    enabled: true          # Phase 4: traffic-light state via HSV
+    classifier: hsv        # hsv | cnn (Phase 8)
+    hsv:
+      min_saturation: 100  # min S to count a pixel as lit colour
+      min_value: 80        # min V (brightness)
+      confidence_threshold: 0.05  # min lit-pixel ratio to trust the result
+      min_crop_size: 10    # skip crops smaller than this (px)
 
 fusion:
   enabled: false         # only meaningful when depth/semantic available (CARLA)
@@ -35,6 +50,11 @@ risk:
   ttc_warn: 3.0          # seconds
   ttc_danger: 1.5
   ego_lane_ratio: 0.4    # central horizontal band treated as ego lane (0..1)
+  smooth_window: 5       # frames for the risk-level majority vote
+  danger_holdoff: 3      # hold WARNING this many frames after a DANGER
+  ttc_history_len: 10    # deque size for the TTC estimator
+  fps: 25.0              # video fps (sample.mp4 is 25; used for TTC/s)
+  min_ds_per_sec: 0.5    # min looming rate to count as approaching (px/s)
 
 decision:
   enabled: true

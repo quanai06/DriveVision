@@ -1,0 +1,27 @@
+# Phase 4 test config — traffic-light detection + HSV state classification.
+# (default.yaml already enables this; kept for spec parity / focused runs.)
+perception:
+  detection:
+    enabled: true
+    weights: models/weights/yolo.pt
+    conf: 0.35
+    iou: 0.5
+    classes: null          # detect all; class 9 filtered inside the TL detector
+    imgsz: 640
+  tracking:
+    enabled: false         # focus on traffic lights for this run
+  lane:
+    enabled: false
+  traffic_light:
+    enabled: true
+    classifier: hsv
+    hsv:
+      min_saturation: 100
+      min_value: 80
+      confidence_threshold: 0.05
+      min_crop_size: 10
+
+output:
+  display: false
+  save_path: output/phase4_output.mp4
+  fps: 30
